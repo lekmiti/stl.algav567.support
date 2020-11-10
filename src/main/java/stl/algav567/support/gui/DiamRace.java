@@ -1,7 +1,7 @@
 package stl.algav567.support.gui;
 
 
-import edu.lip6.stl.algav567.algorithms.Algorithms;
+import stl.algav567.support.algorithms.Algorithms;
 
 import javax.swing.*;
 import java.awt.*;

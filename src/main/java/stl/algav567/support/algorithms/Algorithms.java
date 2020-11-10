@@ -1,8 +1,9 @@
 package stl.algav567.support.algorithms;
 
 
-import edu.lip6.stl.algav567.supportGUI.Circle;
-import edu.lip6.stl.algav567.supportGUI.Line;
+
+import stl.algav567.support.gui.Circle;
+import stl.algav567.support.gui.Line;
 
 import java.awt.*;
 import java.util.List;

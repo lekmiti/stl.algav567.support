@@ -1,7 +1,8 @@
 package stl.algav567.support.gui;
 
 
-import edu.lip6.stl.algav567.algorithms.Algorithms;
+
+import stl.algav567.support.algorithms.Algorithms;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
