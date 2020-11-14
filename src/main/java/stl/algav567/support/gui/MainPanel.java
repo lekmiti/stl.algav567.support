@@ -3,7 +3,7 @@ package stl.algav567.support.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 
 public class MainPanel extends JPanel {
     private static final long serialVersionUID = -662473925955493029L;
@@ -14,7 +14,7 @@ public class MainPanel extends JPanel {
         this.add(this.displayPanel, "Center");
     }
 
-    public void drawPoints(ArrayList<Point> points) {
+    public void drawPoints(List<Point> points) {
         this.displayPanel.drawPoints(points);
     }
 
@@ -34,7 +34,7 @@ public class MainPanel extends JPanel {
         this.displayPanel.shiftRightAll();
     }
 
-    public ArrayList<Point> getPoints() {
+    public List<Point> getPoints() {
         return this.displayPanel.getPoints();
     }
 
@@ -57,4 +57,10 @@ public class MainPanel extends JPanel {
     public void addCircleAndT(Circle c, long t) {
         this.displayPanel.addCircleAndT(c, t);
     }
+
+    public void addPolygoneAndT(List<Point> env, long t) {
+        this.displayPanel.addPolygoneAndT(env, t);
+    }
 }
+
+

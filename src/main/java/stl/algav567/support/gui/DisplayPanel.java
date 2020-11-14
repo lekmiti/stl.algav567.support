@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D.Double;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DisplayPanel extends JPanel {
     private static final long serialVersionUID = -1401707925288150149L;
@@ -15,9 +16,9 @@ public class DisplayPanel extends JPanel {
     private int xModifier;
     private int yModifier;
     private Graphics2D g2d;
-    private ArrayList<Point> points;
-    private ArrayList<Line> lines;
-    private ArrayList<Circle> circles;
+    private List<Point> points;
+    private List<Line> lines;
+    private List<Circle> circles;
     private long time;
 
     public DisplayPanel() {
@@ -38,7 +39,9 @@ public class DisplayPanel extends JPanel {
         this.g2d.drawString("- 'r' pour rafraîchir le nuage de points", 15, 40);
         this.g2d.drawString("- 'd' pour lancer calculDiametre", 15, 60);
         this.g2d.drawString("- 'c' pour lancer calculCercleMin", 15, 80);
-        this.g2d.drawString("- 'h', 'j', 'k', 'l' pour déplacer les points", 15, 100);
+        this.g2d.drawString("- 'e' pour lancer enveloppeConvexe", 15, 100);
+        this.g2d.drawString("- 'o' pour lancer calculDiametreOpitmise", 15, 120);
+        this.g2d.drawString("- 'h', 'j', 'k', 'l' pour déplacer les points", 15, 140);
         this.g2d.setColor(Color.BLUE);
         this.g2d.setStroke(new BasicStroke(6.0F, 1, 1));
 
@@ -74,12 +77,12 @@ public class DisplayPanel extends JPanel {
         if (this.time != 0L) {
             this.g2d.setColor(Color.BLACK);
             this.g2d.setFont(new Font(this.g2d.getFont().getName(), 1, 32));
-            this.g2d.drawString("Temps de calcul: " + Long.toString(this.time) + " ms", 20, 150);
+            this.g2d.drawString("Temps de calcul: " + Long.toString(this.time) + " ms", 20, 190);
         }
 
     }
 
-    public void drawPoints(ArrayList<Point> points) {
+    public void drawPoints(List<Point> points) {
         this.points = points;
         this.repaint();
     }
@@ -104,7 +107,7 @@ public class DisplayPanel extends JPanel {
         this.repaint();
     }
 
-    public ArrayList<Point> getPoints() {
+    public List<Point> getPoints() {
         return this.points;
     }
 
@@ -133,6 +136,16 @@ public class DisplayPanel extends JPanel {
 
     public void addCircleAndT(Circle c, long t) {
         this.circles.add(c);
+        this.time = t;
+        this.repaint();
+    }
+
+    public void addPolygoneAndT(List<Point> env, long t) {
+        for(int i = 0; i < env.size() - 1; ++i) {
+            this.lines.add(new Line((Point)env.get(i), (Point)env.get(i + 1), Color.RED));
+        }
+
+        this.lines.add(new Line((Point)env.get(env.size() - 1), (Point)env.get(0), Color.RED));
         this.time = t;
         this.repaint();
     }

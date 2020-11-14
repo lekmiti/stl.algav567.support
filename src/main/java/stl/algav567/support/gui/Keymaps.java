@@ -7,13 +7,16 @@ import stl.algav567.support.algorithms.Algorithms;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 public class Keymaps implements KeyListener {
     private RootPanel rootPanel;
+    private int nbPoints;
     private Algorithms algorithms;
 
-    public Keymaps(RootPanel rootPanel, Algorithms algorithms) {
+    public Keymaps(RootPanel rootPanel, int nbPoints, Algorithms algorithms) {
         this.rootPanel = rootPanel;
+        this.nbPoints = nbPoints;
         this.algorithms = algorithms;
     }
 
@@ -25,12 +28,11 @@ public class Keymaps implements KeyListener {
 
     public void keyTyped(KeyEvent event) {
         Line l;
-        Circle c;
         long t;
         switch(event.getKeyChar()) {
             case 'c':
                 t = System.currentTimeMillis();
-                c = algorithms.calculCercleMin(this.rootPanel.getPoints());
+                Circle c = algorithms.calculCercleMin(this.rootPanel.getPoints());
                 t = System.currentTimeMillis() - t;
                 c.setColor(Color.RED);
                 this.rootPanel.addCircleAndT(c, t);
@@ -42,38 +44,27 @@ public class Keymaps implements KeyListener {
                 l.setColor(Color.RED);
                 this.rootPanel.addLineAndT(l, t);
                 break;
-            case 'f':
-                try {
-                    t = System.currentTimeMillis();
-                    l = algorithms.calculDiametre(this.rootPanel.getPoints());
-                    t = System.currentTimeMillis() - t;
-                    l.setColor(Color.GREEN);
-                    this.rootPanel.addLineAndT(l, t);
-                    break;
-                } catch (Exception var9) {
-                }
             case 'e':
                 try {
                     t = System.currentTimeMillis();
-                    c = algorithms.calculCercleMin(this.rootPanel.getPoints());
+                    List<Point> env = algorithms.enveloppeConvexe(this.rootPanel.getPoints());
                     t = System.currentTimeMillis() - t;
-                    c.setColor(Color.GREEN);
-                    this.rootPanel.addCircleAndT(c, t);
+                    this.rootPanel.addPolygoneAndT(env, t);
                     break;
-                } catch (Exception var8) {
+                } catch (Exception var9) {
                 }
             case 'r':
                 try {
-                    RandomPointsGenerator.main((String[])null);
+                    RandomPointsGenerator.generate(this.nbPoints);
                     DiamRace.readFile();
                     this.rootPanel.refreshLine();
-                } catch (Exception var7) {
+                } catch (Exception var8) {
                 }
+            case 'f':
             case 'g':
             case 'i':
             case 'm':
             case 'n':
-            case 'o':
             case 'p':
             case 'q':
             default:
@@ -89,6 +80,13 @@ public class Keymaps implements KeyListener {
                 break;
             case 'l':
                 this.rootPanel.shiftRightAll();
+                break;
+            case 'o':
+                t = System.currentTimeMillis();
+                l = algorithms.calculDiametreOptimise(this.rootPanel.getPoints());
+                t = System.currentTimeMillis() - t;
+                l.setColor(Color.GREEN);
+                this.rootPanel.addLineAndT(l, t);
         }
 
     }

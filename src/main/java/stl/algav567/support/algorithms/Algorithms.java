@@ -1,7 +1,6 @@
 package stl.algav567.support.algorithms;
 
 
-
 import stl.algav567.support.gui.Circle;
 import stl.algav567.support.gui.Line;
 
@@ -13,4 +12,9 @@ public interface Algorithms {
     Line calculDiametre(List<Point> points);
 
     Circle calculCercleMin(List<Point> points);
+
+    List<Point> enveloppeConvexe(List<Point> points);
+
+    Line calculDiametreOptimise(List<Point> points);
+
 }
