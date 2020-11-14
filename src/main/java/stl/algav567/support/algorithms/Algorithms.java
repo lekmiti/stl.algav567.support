@@ -13,4 +13,9 @@ public interface Algorithms {
     Line calculDiametre(List<Point> points);
 
     Circle calculCercleMin(List<Point> points);
+
+    Line calculDiametreOptimise(List<Point> points) ;
+
+    List<Point> enveloppeConvexe(List<Point> points);
+
 }
