@@ -18,7 +18,7 @@ public class DiamRace {
     public DiamRace() {
     }
 
-    public void launch(final Algorithms algorithms) {
+    public void launch(final String[] args, final Algorithms algorithms) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 DiamRace.framedGUI = new FramedDiamRace(DiamRace.width, DiamRace.height, DiamRace.title, algorithms);
